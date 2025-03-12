@@ -1,6 +1,6 @@
 # Azure DevOps Pipeline for Building and Deploying a Spring Boot Application
 
-name: Build and deploy JAR app to Azure Web App - sjbit-demo-app-service
+name: Build and deploy JAR app to Azure Web App - sjbit-cse
 
 on:
   push:
