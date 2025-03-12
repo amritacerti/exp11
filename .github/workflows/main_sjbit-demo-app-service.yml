@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: demo/target/sjbit-demo-app.jar  # Uploads the specific JAR file
+          path: demo/target/sjbit-cse.jar  # Uploads the specific JAR file
 
   deploy:
     runs-on: ubuntu-latest
@@ -62,6 +62,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'sjbit-demo-app-service'
+          app-name: 'sjbit-cse'
           slot-name: 'Production'
-          package: 'sjbit-demo-app.jar'  # Deploying the specific JAR file
+          package: 'sjbit-cse.jar'  # Deploying the specific JAR file
