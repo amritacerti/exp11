@@ -1,5 +1,4 @@
 # Azure DevOps Pipeline for Building and Deploying a Spring Boot Application
-
 name: Build and deploy JAR app to Azure Web App - sjbit-demo-app-service
 
 on:
@@ -23,16 +22,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
+          cache: 'maven'
 
       - name: Build with Maven
         run: mvn clean package
-        working-directory: demo  # Ensures Maven runs inside the 'demo' directory
+        working-directory: demo # Ensures Maven runs inside the 'demo' directory
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: demo/target/sjbit-demo-app.jar  # Uploads the specific JAR file
+          path: demo/target/*.jar # Use wildcard to ensure JAR is found even if name is dynamically generated
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
-          path: .
+          path: ./
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'sjbit-demo-app-service'
           slot-name: 'Production'
-          package: 'sjbit-demo-app.jar'  # Deploying the specific JAR file
+          package: '*.jar' # Use wildcard to find JAR 
