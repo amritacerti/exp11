@@ -62,6 +62,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'sjbit-demo-app-service'
+          app-name: 'sjbit-demo'
           slot-name: 'Production'
           package: '*.jar' # Use wildcard to find JAR 
